@@ -1,0 +1,89 @@
+https://www.modinfo.ro/bac/variante-test-2021/info/v3.pdf
+
+1.
+#include <iostream>
+using namespace std;
+
+int suma(int n){
+  int suma = 1;
+  for(int i = 4; i <= n; i++){
+    if(n % i == 0){
+      int div = 0;
+      for(int j = 2; j <= i/2; j++){
+        if(i % j == 0){
+          div++;
+        }
+      }
+      if(div != 0){
+        suma += i;
+      }
+    }
+  }
+  return suma;
+}
+
+int main(){
+  int n;
+  cin >> n;
+  cout << suma(n);
+}
+
+2.
+#include <iostream>
+using namespace std;
+
+int main(){
+  int n, m, **mat;
+  cin >> n >> m;
+  mat = new int*[n];
+  for(int i = 0; i < n; i++){
+    mat[i] = new int[m];
+    for(int j = 0; j < m; j++){
+      cin >> mat[i][j];
+    }
+  }
+  int *freq;
+  freq = new int[400];
+  for(int i = 0; i < 400; i++){
+    freq[i] = 0;
+  }
+  for(int j = 0; j <= m; j++){
+    freq[mat[j][0]]++;
+    freq[mat[j][n-2]]++;
+  }
+  for(int i = 1; i < 400; i++){
+    if(freq[i] == 2){
+      cout << i << " ";
+    }
+  }
+  return 0;
+}
+
+3.
+#include <iostream>
+#include <fstream>
+using namespace std;
+ifstream fin("Date.in");
+
+int main(){
+  int n, *freq, poz = 0;
+  freq = new int[10];
+  for(int i = 0; i < 10; i++){
+    freq[i] = 0;
+  }
+  while(fin >> n){
+    poz++;
+    int zec = n % 100 / 10;
+    if(freq[zec] == 0){
+      freq[zec]++;
+    }else{
+      freq[zec] = poz;
+    }
+  }
+  for(int i = 0; i < 10; i++){
+    if(freq[i] > 1){
+      cout << freq[i] << " ";
+    }
+  }
+  return 0;
+}
